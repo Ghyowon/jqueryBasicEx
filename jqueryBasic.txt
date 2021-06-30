@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<title> 첫 연습 </title>
+
+<style type="text/css">
+.active {outline :  2px solid red;
+		 border : 2px solid red;
+		 }
+
+</style>
+
+<script src="../lib/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(function(){
+
+//1.li의 자식 클래스 man과 woman의 css를 추가 및 변경하기
+$('.man').css({'background' : 'pink'});
+$('.woman').css({'background' : 'yellow'});
+
+//2. 입력창에서 포커스가 가면(focus) active(빨간테두리) 지정하고
+// 포커스를 잃으면 (blur) activr(빨간테두리) 제거하기
+$('input.inputText').focus(function({
+	$('input.inputText').addClass('active');
+	});
+	$('input.inputText').blur(function({
+		$(]input.inputText').removeClass('active');
+	});
+
+//3. div태그에 글씨와 그림 넣기
+//text() : 요소안에 태그를 입력하면 텍스트로 받아들임
+//html() : 요소안에 태그를 입력하면 html태그로 받아들임
+$('#divText').text('<img src = "images/grim.jpg">') //=><img src = "images/grim.jpg"> 이렇게 나온다
+$('#divHtml').html('<img src = "images/grim.jpg">') //=> html태그로 받아들여 경로를 찾아 이미지를 불러온다
+
+//3-1. 강아지 그림을 클릭했을 때 이벤트 발생
+// src 속성을 puppy에서 cat으로 바꿔라
+$('#changeGrim').click(function({
+	$(this).attr('src',$(this).attr('src').replace('puppy','cat'));
+});
+
+//4. p태그에 내용을 입력하여 버튼을 클릭하면 입력값을 가져올 수 있도록 하기
+$('#check').click(function({ 
+	// 사용자가 입력한 이름값을 얻어오기
+	//이름을 입력하고 확인을 클릭하면 사용자가 입력한 값을 얻어오게 하는 함수
+	let name = $('#tf).val();
+	let result = '';
+	result += "이름 : " + name;
+	
+	// 사용자가 입력한 메세지 값을 얻어오기
+	let message = $('#ta').val();
+	result += " 메세지 :  " + message;
+ 
+	//사용자가 클릭한 주소값을 가져오기
+	let address = $('#sel').val();
+	result += " 주소 : " + address;
+
+	//여러개 선택한 값을 가져오기
+	let ad_next = $('#sel_m selected:option').text();
+	result += " " + ad_next;
+	
+	// div에 결과값 출력하기
+	$('#result').text(result);
+});
+
+//5. 동적 테이블 만들기
+var actor = $('#actor');
+var tae = $('#tae');
+var su = $('#su');
+var bin = $('#bin');
+
+actor.append(tae); //actor라는 객체 다음에 tae라는 객체를 붙이겠다.
+su.appendTo(actor); //actor라는 객체에 su라는 객체를 붙이겠다.
+	
+actor.append('<div>어떤배우</div>');
+
+var n = $('<div/>');
+n.text('그냥배우');
+actor.append(n);
+
+//6.여러개의 요소에 각각 뽑아온다
+$('#data').each(function({
+	$(this).click(function({
+	alert($(this).text())
+	});
+});
+
+});
+
+</head>
+<body>
+	<!--  1 -->
+	<ul>
+		<li class="man">김수현</li>
+		<li class="woman">김희애</li>
+		<li class="woman">송혜교</li>
+		<li class="man">하정우</li>
+		<li class="woman">김태희</li>
+	</ul>
+	<!-- 2 -->
+	<input type="text" class="inputText"/>
+	<input type="text" class="inputText"/>
+	<input type="text" class="inputText"/>
+	
+
+	<!-- 3 -->
+		<div id="divText">여기에 글씨를</div>
+		<div id="divHtml">여기에 그림을</div>
+		<div id="divEmpty">여기를 비움</div>
+		<p>
+		<img src="images/puppy.jpg" id='changeGrim'>
+		</p>
+		
+	<!-- 4 -->	
+		<p>
+		이름 : <input id="tf" type="text" size="20" /><br/>
+		메세지 : <textarea id="ta" rows="3" cols="20"></textarea><br/>
+		주소 : <select id="sel">
+			<option value="seoul">서울</option>	<!-- option에 value 값 없어도 됨 -->
+			<option value="busan">부산</option>
+			<option value="masan">마산</option>
+			<option value="incheon">인천</option>
+		</select>
+		<select id="sel_m" multiple="multiple">
+			<option value="seom1">제주도</option>
+			<option value="seom2">울릉도</option>
+			<option value="seom3">독도</option>
+			<option value="seom4">거제도</option>
+		</select><br/>
+		<input type='button' id='check' value='확인'/>
+		<input type='button' id='init' value='초기화'/> <!--  [과제] 클릭시 값 지정하려면  -->
+		<div id='result'></div>
+		</p>
+		
+	<!-- 5 -->
+		<div id="actor">배우</div>
+		<div id="tae">김태희</div>
+		<div id="su">김수현</div>
+		<div id="bin">현빈</div>
+		<!-- [ 과제 ] 동적 테이블 만들기  -->
+
+	<!-- 6 -->
+		<div class="data">이름</div>
+		<div class="data">직업</div>
+		<div class="data">나이</div>
+		
+	<!-- 7 -->
+	<!-- male과 female radio 박스 만들기 -->
+	<fieldset>
+		<legend>성별</legend>
+		<input type="radio" name="gender" id="male" check="checked"><label from="gendermale">남성</label></input>
+		<input type="radio" name="gender" id="female" check="checked"><label from="genderfemale">여성</label></input>
+	</fieldset>
+	
+</body>
+</html>
